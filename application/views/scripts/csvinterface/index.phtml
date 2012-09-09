@@ -1,0 +1,75 @@
+<div class="row">
+
+	<?php
+	//Do Result notifications
+	foreach ($this->notifications as $notification) {
+		if ($notification['type'] == 'success') {
+			echo "<div id='notifygood'>";
+			echo $notification['text'];
+			echo "</div>";
+		} else {
+			echo "<div id='notifybad'>";
+			echo $notification['text'];
+			echo "</div>";
+		}
+	}
+	?>
+
+	<form enctype="multipart/form-data" action="csvinterface/uploadcsv" method="post">
+		<h2>Import CSV</h2>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Starting Bib:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="bibstart" type="text" size="10" maxlength="4">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>CSV:</h3>
+			</div>
+			<div class="formcol2">
+				<input type="file" name="file" id="file" size="9">
+			</div>
+		</div>
+		<input class="button" type="submit" value="Import" name="submit">
+
+	</form>
+
+	<form action="csvinterface/export" method="post">
+		<h2>Export CSV</h2>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Starting Bib:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="startbib" type="text" size="10" maxlength="4">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Ending Bib:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="endbib" type="text" size="10" maxlength="4">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Export Type:</h3>
+			</div>
+			<div class="formcol2">
+				<select name="exportType">
+					<option value="bib">Bib Labels</option>
+					<option value="mail">Mail Labels</option>
+					<option value="time">Timing </option>
+					<option value="all">Everything</option>
+
+				</select>
+			</div>
+		</div>
+		<input class="button" type="submit" value="Export" name="submit">
+
+	</form>
+</div>

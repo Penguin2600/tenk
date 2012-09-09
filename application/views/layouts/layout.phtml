@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title><?= $this -> title; ?>
+			| TenK Data Entry</title>
+		<link rel="shortcut icon" href="/images/icons/favicon.png" />
+
+		<link rel="stylesheet" type="text/css" href="<?=$this -> baseUrl(); ?>/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$this -> baseUrl(); ?>/css/style.css" />
+
+		<? if($this->css):
+		?>
+		<? foreach ($this->css as $css):
+		?>
+		<link rel="stylesheet" type="text/css" href="<?= $css; ?>" />
+		<? endforeach; ?>
+		<? endif; ?>
+
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+		<script type="text/javascript" src="/js/tenk.js"></script>
+
+		<? if ($this->js):
+		?>
+		<? foreach ($this->js as $js):
+		?>
+		<script type="text/javascript" src="<?= $js; ?>"></script>
+		<? endforeach; ?>
+		<? endif; ?>
+	</head>
+
+	<body>
+		<noscript>
+			<font size="5" color=#"EE0000">TURN ON JAVASCRIPT OR YOU'RE GONNA HAVE A BAD TIME</font>
+		</noscript>
+
+		<div class="row">
+			<div class="span9">
+				<div id="header">
+
+					<a id="siteTitle" href="/"> TenK Data Entry </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span3">
+
+				<ul id="navigation" class="clearfix">
+					<li>
+						<a href="/insert">Insert Form</a>
+					</li>
+					<li>
+						<a href="/quickinsert">Quick Form</a>
+					</li>
+					<li>
+						<a href="/search">Search Form</a>
+					</li>
+					<li>
+						<a href="/csvinterface">Import/Export</a>
+					</li>
+				</ul>
+			</div>
+			<div class="span6">
+				<?= $this -> layout() -> content; ?>
+				<div id="footer">
+					&copy; <?= date('Y'); ?>
+					Charles Bock
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<div id="dropdown">
+
+		<!-- Here we generate our event radio buttons from our database,
+		this keeps our html uniform and allows us to easily change
+		the layout or events at any time-->
+		<?php
+		//	$this -> getOptions;
+		//	foreach ($this->result as $event) {
+		//		if ($event['eid'] == 1) {
+		//			echo '<li><input name="event" type="radio" value="' . $event['eid'] . '" id="' . $event['shortname'] . '" checked> ' . $event['name'] . "</li>";
+
+		//		} else {
+		//			echo '<li><input name="event" type="radio" value="' . $event['eid'] . '" id="' . $event['shortname'] . '"> ' . $event['name'] . "</li>";
+		//		}
+		//	}
+		?>
+
+		<?php
+		$this -> getOptions;
+		echo '<select name="event" id="event">';
+		foreach ($this->result as $event) {
+			echo '<option value="' . $event['eid'] . '">' . $event['name'] . '</option>';
+		}
+		echo '</select>';
+		?>
+</div>

@@ -1,0 +1,99 @@
+<div class="row">
+
+	<form action="/search/query" method="post">
+		<h2>Search Form</h2>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Bib Number:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="bibnumber" name="bibnumber" type="text" size="10" maxlength="5">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Last Name:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="lastname" type="text" size="25">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>First Name:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="firstname" type="text" size="25">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>ZipCode:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="zipcode" type="text" size="4" maxlength="2">
+			</div>
+		</div>
+		<input class="button" type="submit" value="Search" name="submit">
+
+	</form>
+
+	<?php
+	//Do Result notifications
+	foreach ($this->notifications as $notification) {
+		if ($notification['type'] == 'success') {
+			echo "<div id='notifygood'>";
+			echo $notification['text'];
+			echo "</div>";
+		} else {
+			echo "<div id='notifybad'>";
+			echo $notification['text'];
+			echo "</div>";
+		}
+	}
+
+	// Do output and tabulation of header
+	if (sizeof($this -> searchData) >= 1) {
+
+		echo '<div id="searchresults">';
+		echo '<div id="searchheading">';
+		echo '<div class="modifyheader"><img src="/images/edit.png"></div>';
+		echo '<div class="modifyheader"><img src="/images/remove.png"></div>';
+		foreach ($this -> searchKeys[0] as $header) {
+			if ($header != 'pid') {
+				echo '<div class="columnheader ' . $header.'">';
+				echo $header . " ";
+				echo '</div>';
+			}
+
+		}
+		echo '</div>';
+
+		// Do output and tabulation of data values
+		foreach ($this -> searchData as $data) {
+			foreach ($data as $row) {
+				echo "<div class='searchrow'>";
+				echo '<div class="modifybutton"><a href="/edit/pulledit?id=' . $row['pid'] . '"><img src="/images/edit.png"></a></div>';
+				echo '<div class="modifybutton"><a href="/search/delete?id=' . $row['pid'] . '" onclick="javascript:return confirm(\'Confirm Delete\');"><img src="/images/remove.png"></a></div>';
+				foreach ($row as $key => $value) {
+					if ($key != 'pid') {
+						//cut the timestamp down to just the date.
+						if ($key == 'timestamp') {
+							$value = explode(" ", $value);
+							echo '<div class="searchvalue">';
+
+							echo $value[0] . " ";
+							echo '</div>';
+						} else {
+							echo '<div class="searchvalue ' . $key . '">';
+							echo $value . " ";
+							echo '</div>';
+						}
+					}
+				}
+				echo "</div>";
+			}
+		}
+	}
+	?>
+</div>

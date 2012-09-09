@@ -1,0 +1,192 @@
+<div class="row">
+
+	<?php
+	//Do Result notifications
+	foreach ($this->notifications as $notification) {
+		if ($notification['type'] == 'success') {
+			echo "<div id='notifygood'>";
+			echo $notification['text'];
+			echo "</div>";
+		} else {
+			echo "<div id='notifybad'>";
+			echo $notification['text'];
+			echo "</div>";
+		}
+	}
+
+	//get our form values
+	$formValues = $this -> editData[0];
+	?>
+
+	<!-- set value for our select boxes -->
+	<script>
+	$(document).ready(function() {
+   $('#registration').val('<?=$formValues['registration'] ?>');
+   $('#size').val('<?=$formValues['size'] ?>');
+   $('#division').val('<?=$formValues['division'] ?>');
+   $('#event').val('<?=$formValues['event'] ?>');
+ });
+	</script>
+
+	<form id="editForm" action="/edit/pushedit" method="post">
+		<h2>Edit Form</h2>
+
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Bib Number:</h3>
+			</div>
+			<div class="formcol2">
+
+				<input id="bibnumber" name="bibnumber" type="text" value="<?=$formValues['bibnumber'] ?>"size="10" maxlength="5">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Last Name:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="lastname" name="lastname" type="text" value="<?=$formValues['lastname'] ?>" size="25">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>First Name:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="firstname" name="firstname" type="text" value="<?=$formValues['firstname'] ?>"size="25">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Address1:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="address1" type="text" value="<?=$formValues['address1'] ?>"size="55">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Address2:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="address2" type="text" value="<?=$formValues['address2'] ?>"size="55">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>City:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="city" name="city" type="text" value="<?=$formValues['city'] ?>"size="40">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>State:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="state" name="state" type="text" value="<?=$formValues['state'] ?>"size="15" maxlength="2">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Zip Code:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="zipcode" name="zipcode" type="text" value="<?=$formValues['zipcode'] ?>"size="10" maxlength="5">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Email:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="email" name="email" type="text" value="<?=$formValues['email'] ?>"size="55">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Age:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="age" name="age" type="text" size="2" value="<?=$formValues['age'] ?>"maxlength="2">
+			</div>
+		</div>
+
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Gender:</h3>
+			</div>
+			<div class="formcol2">
+				<ul id="radiolist" class="clearfix">
+					<li>
+						<input name="sex" type="radio" value="m" id="m" <?
+						if ($formValues['sex'] == "m") {echo 'checked';
+						}
+						?> >
+						Male
+					</li>
+					<li>
+						<input name="sex" type="radio" value="f" id="f" <?
+						if ($formValues['sex'] == "f") {echo 'checked';
+						}
+						?> >
+						Female
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>T-Shirt Size:</h3>
+			</div>
+			<div class="formcol2">
+				<?php
+				echo $this -> partial('partials/shirtRadios.phtml', array('result' => $this -> sizeOptions));
+				?>
+
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Event:</h3>
+			</div>
+			<div class="formcol2">
+				<?php
+				echo $this -> partial('partials/eventRadios.phtml', array('result' => $this -> eventOptions));
+				?>
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Division:</h3>
+			</div>
+			<div class="formcol2">
+				<?php
+				echo $this -> partial('partials/divisionRadios.phtml', array('result' => $this -> divisionOptions));
+				?>
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Team Name:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="team" type="text" value="<?=$formValues['team'] ?>"size="40">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
+				<h3>Registration Type:</h3>
+			</div>
+			<div class="formcol2">
+				<?php
+				echo $this -> partial('partials/registrationRadios.phtml', array('result' => $this -> registrationOptions));
+				?>
+			</div>
+		</div>
+		<input name="pid" type="hidden" value="<?=$formValues['pid'] ?>">
+		<input class="button" type="submit" value="Submit" name="submit">
+
+</div>

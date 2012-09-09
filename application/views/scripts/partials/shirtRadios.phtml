@@ -1,0 +1,25 @@
+<div id="dropdown">
+		<!-- Here we generate our size radio buttons from our database,
+		this keeps our html uniform and allows us to easily change
+		the layout or sizes at any time-->
+		<!-- 		<?php
+		$this -> getOptions;
+		foreach ($this->result as $size) {
+		if ($size['sid'] == 1) {
+		echo '<li><input name="size" type="radio" value="' . $size['sid'] . '" id="' . $size['shortname'] . '" checked> ' . $size['name'] . "</li>";
+
+		} else {
+		echo '<li><input name="size" type="radio" value="' . $size['sid'] . '" id="' . $size['shortname'] . '" > ' . $size['name'] . "</li>";
+		}
+		}
+		?> -->
+
+		<?php
+		$this -> getOptions;
+		echo '<select name="size" id="size">';
+		foreach ($this->result as $size) {
+			echo '<option value="' . $size['sid'] . '">' . $size['name'] . '</option>';
+		}
+		echo '</select>';
+		?>
+</div>

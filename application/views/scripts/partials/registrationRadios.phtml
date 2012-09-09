@@ -1,0 +1,25 @@
+<div id="dropdown">
+		<!-- Here we generate our size radio buttons from our database,
+		this keeps our html uniform and allows us to easily change
+		the layout or sizes at any time-->
+		<?php
+		//$this -> getOptions;
+		//foreach ($this->result as $regtype) {
+		//	if ($regtype['rid'] == 1) {
+		//		echo '<li><input name="registration" type="radio" value="' . $regtype['rid'] . '" id="' . $regtype['shortname'] . '" checked> ' . $regtype['name'] . "</li>";
+
+		//	} else {
+		//		echo '<li><input name="registration" type="radio" value="' . $regtype['rid'] . '" id="' . $regtype['shortname'] . '"> ' . $regtype['name'] . "</li>";
+		//	}
+		//}
+		?>
+
+		<?php
+		$this -> getOptions;
+		echo '<select name="registration" id="registration">';
+		foreach ($this->result as $regtype) {
+			echo '<option value="' . $regtype['rid'] . '">' . $regtype['name'] . '</option>';
+		}
+		echo '</select>';
+		?>
+</div>
