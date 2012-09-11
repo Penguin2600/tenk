@@ -14,7 +14,7 @@ class TenK_Helpers {
 
 	}
 
-	public function validate($insertData,$checkBib) {
+	public function validate($insertData, $checkBib) {
 		$valid = "valid";
 		foreach ($insertData as $key => $value) {
 
@@ -22,7 +22,7 @@ class TenK_Helpers {
 				if (!is_numeric($value)) {
 					$valid = "bib not numeric";
 				}
-				
+
 				if ($this -> checkBibConflicts($value) && $checkBib) {
 					$valid = "bib already in use";
 				}
@@ -42,8 +42,14 @@ class TenK_Helpers {
 			}
 
 			if ($key == "state") {
-				if (!preg_match('/[a-z]{2}/', $value, $matches)) {
+				if (!preg_match('/[a-zA-Z]{2}/', $value, $matches)) {
 					$valid = "invalid state";
+				}
+			}
+
+			if ($key == "sex") {
+				if (!preg_match('/[A-Z]{1}/', $value, $matches)) {
+					$valid = "invalid sex";
 				}
 
 			}

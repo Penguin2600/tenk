@@ -14,9 +14,7 @@
 		}
 	}
 	?>
-	
 
-	
 	<form id="insertForm" action="/insert/post" method="post">
 		<h2>Main Entry Form</h2>
 
@@ -63,6 +61,14 @@
 		</div>
 		<div class="formRow">
 			<div class="formcol1">
+				<h3>Zip Code:</h3>
+			</div>
+			<div class="formcol2">
+				<input id="zipcode" name="zipcode" type="text" size="10" maxlength="5">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
 				<h3>City:</h3>
 			</div>
 			<div class="formcol2">
@@ -75,14 +81,6 @@
 			</div>
 			<div class="formcol2">
 				<input id="state" name="state" type="text" size="15" maxlength="2">
-			</div>
-		</div>
-		<div class="formRow">
-			<div class="formcol1">
-				<h3>Zip Code:</h3>
-			</div>
-			<div class="formcol2">
-				<input id="zipcode" name="zipcode" type="text" size="10" maxlength="5"">
 			</div>
 		</div>
 		<div class="formRow">
@@ -109,12 +107,16 @@
 			<div class="formcol2">
 				<ul id="radiolist" class="clearfix">
 					<li>
-						<input name="sex" type="radio" value="m" id="m"checked>
+						<input name="sex" type="radio" value="M" id="M"checked>
 						Male
 					</li>
 					<li>
-						<input name="sex" type="radio" value="f" id="f">
+						<input name="sex" type="radio" value="F" id="F">
 						Female
+					</li>
+					<li>
+						<input name="sex" type="radio" value="X" id="X">
+						Other
 					</li>
 				</ul>
 			</div>

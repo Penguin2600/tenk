@@ -7,8 +7,8 @@ function getZip(zipCode) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[0]) {
 				console.log(results[0])
-				city = results[0].formatted_address.split(',')[0].toLowerCase();
-				state = results[0].formatted_address.split(',')[1].split(" ")[1].toLowerCase();
+				city = results[0].formatted_address.split(',')[0].toUpperCase();
+				state = results[0].formatted_address.split(',')[1].split(" ")[1].toUpperCase();
 				$('#city').val(city);
 				$('#state').val(state);
 			}
@@ -54,10 +54,7 @@ $(document).ready(function() {
 			},
 			firstname : "required",
 			lastname : "required",
-			city : "required",
-			state : "required",
 			zipcode : {
-				required : true,
 				digits : true
 			},
 			age : {
@@ -90,10 +87,7 @@ $(document).ready(function() {
 			},
 			firstname : "required",
 			lastname : "required",
-			city : "required",
-			state : "required",
 			zipcode : {
-				required : true,
 				digits : true
 			},
 			age : {
@@ -127,7 +121,6 @@ $(document).ready(function() {
 			},
 			firstname : "required",
 			lastname : "required",
-			state : "required",
 			age : {
 				required : true,
 				range : [1, 99],

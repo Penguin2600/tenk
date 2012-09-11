@@ -33,7 +33,7 @@ class CsvinterfaceController extends Zend_Controller_Action {
 			$filePart = "bib" . time() . ".csv";
 			$fileName = $exportPath . $filePart;
 			$dlPath = "/exports/" . $filePart;
-			$sql = "SELECT firstname,lastname,sex,age,size.name,bibnumber,event.name,team INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, size, event WHERE participant.event=event.eid and participant.size=size.sid and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . " ORDER BY bibnumber;";
+			$sql = "(SELECT 'firstname','lastname','sex','age','size','bibnumber','event','team') UNION (SELECT firstname,lastname,sex,age,size.name,bibnumber,event.name,team INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, size, event WHERE participant.event=event.eid and participant.size=size.sid and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . " ORDER BY bibnumber);";
 			$db -> query($sql);
 
 		}
@@ -43,16 +43,16 @@ class CsvinterfaceController extends Zend_Controller_Action {
 			$fileName = $exportPath . $filePart;
 			$dlPath = "/exports/" . $filePart;
 
-			$sql = "SELECT firstname,lastname,sex,age,size.name,bibnumber,address1,address2,city,state,zipcode INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, size WHERE participant.size=size.sid and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . " ORDER BY bibnumber;";
+			$sql = "(SELECT 'firstname','lastname','sex','age','size','bibnumber','address1','address2','city','state','zipcode') UNION (SELECT firstname,lastname,sex,age,size.shortname,bibnumber,address1,address2,city,state,zipcode INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, size WHERE participant.size=size.sid and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . " ORDER BY bibnumber);";
 			$db -> query($sql);
-		}
 
+		}
 		if ($exportType == "time") {
 			$filePart = "time" . time() . ".csv";
 			$fileName = $exportPath . $filePart;
 			$dlPath = "/exports/" . $filePart;
 
-			$sql = "SELECT firstname,lastname,sex,bibnumber,event.name,team, division.name, city, state INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, division, event WHERE participant.event=event.eid and participant.division=division.did and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . " ORDER BY bibnumber;";
+			$sql = "(SELECT 'firstname','lastname','sex','bibnumber','event','team','division','city','state') UNION (SELECT firstname,lastname,sex,bibnumber,event.shortname,team, division.shortname, city, state INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, division, event WHERE participant.event=event.eid and participant.division=division.did and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . " ORDER BY bibnumber);";
 			$db -> query($sql);
 		}
 
@@ -87,7 +87,7 @@ class CsvinterfaceController extends Zend_Controller_Action {
 						//teamname special rules
 						if ($key == 'team') {
 							//get both teamname fields and insert them in the proper place
-							$insertData[$key] = strtolower($data[$column] . $data[15]);
+							$insertData[$key] = $data[$column] . $data[15];
 
 						} elseif ($key == 'size') {
 							$result = $this -> findLike('sid', $key, $data[$column]);
@@ -136,7 +136,7 @@ class CsvinterfaceController extends Zend_Controller_Action {
 							}
 
 						} else {
-							$insertData[$key] = strtolower($data[$column]);
+							$insertData[$key] = $data[$column];
 						}
 					}// do insert with verified free bib number and only if activeid is unique
 					if ($this -> checkConflicts($bibNumber, $insertData['activeid'])) {

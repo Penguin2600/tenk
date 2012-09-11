@@ -15,7 +15,7 @@ body {
 /*========== SITE HEADER STUFF ==========*/
 
 #siteTitle {
-	font-family:                                        ‘Lucida Sans Unicode ’, ‘Lucida Grande’, sans-serif;
+	font-family:                                            ‘Lucida Sans Unicode ’, ‘Lucida Grande’, sans-serif;
 	font-weight: bold;
 	font-size: 20px;
 	letter-spacing: 10px;
@@ -43,7 +43,7 @@ body {
 /*========== GLOBAL FORMAT STUFF ==========*/
 
 h2 {
-	font-family:                                        ‘Lucida Sans Unicode ’, ‘Lucida Grande’, sans-serif;
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
 	font-size: 14px;
 	margin: 0 5px 0 0;
 	padding: 0px;
@@ -53,7 +53,7 @@ h2 {
 }
 
 h3 {
-	font-family:                                        ‘Lucida Sans Unicode ’, ‘Lucida Grande’, sans-serif;
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
 	font-size: 12px;
 	margin: 5px 0 0 5px;
 	padding: 0;
@@ -148,17 +148,19 @@ form {
 }
 
 input[type="text"] {
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
 	width: 190px;
+	font-size: 13px;
 	height: 19px;
-	font-size: 15px;
 	font-weight: bold;
 	margin: 0px;
 }
 
 input[type="text"].error {
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
 	width: 190px;
 	height: 19px;
-	font-size: 15px;
+	font-size: 13px;
 	font-weight: bold;
 	margin: 0px;
 	background: #e99;
@@ -193,7 +195,7 @@ select {
 }
 
 input[type="submit"] {
-	font-family:                                        ‘Lucida Sans Unicode ’, ‘Lucida Grande’, sans-serif;
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
 	width: 120px;
 	font-size: 10px;
 	font-weight: bold;
@@ -220,13 +222,16 @@ input[type="submit"]:hover {
 	font-size: 12px;
 	font-weight: bold;
 	background-color: #222;
-	width: 200px;
+	width: 220px;
 	padding: 0px;
 	margin: 0px;
 }
 #radiolist li {
 	display: inline-block;
 	height: 14px;
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
+	font-size: 12px;
+	vertical-align:middle;
 }
 
 label.error {
@@ -264,7 +269,7 @@ label.error {
 	border-color: #264562;
 	background-color: #264562;
 	color: #FFF;
-	font-family:                                 ‘Lucida Sans Unicode ’, ‘Lucida Grande’, sans-serif;
+	font-family: "Lucida Sans Unicode", Lucida Grande, sans-serif;
 	font-weight: bold;
 	letter-spacing: 2px;
 	font-size: 1.1em;
