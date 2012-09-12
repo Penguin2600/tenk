@@ -19,20 +19,13 @@
 	?>
 
 	<!-- set value for our select boxes -->
-	<script>
+	<script type="text/javascript">
 		$(document).ready(function() {
-		$('#registration').val('<?=$formValues['registration'] ?>
-			');
-			$('#size').val('
-		<?=$formValues['size'] ?>
-			');
-			$('#division').val('
-		<?=$formValues['division'] ?>
-			');
-			$('#event').val('
-		<?=$formValues['event'] ?>
-			');
-			});
+			$('#registration').val(<?=$formValues['registration'] ?>);
+			$('#size').val(<?=$formValues['size'] ?>);
+			$('#division').val(<?=$formValues['division'] ?>);
+			$('#event').val(<?=$formValues['event'] ?>);
+		});
 	</script>
 
 	<form id="editForm" action="/edit/pushedit" method="post">

@@ -41,11 +41,11 @@ class TenK_Helpers {
 
 			}
 
-			if ($key == "state") {
-				if (!preg_match('/[a-zA-Z]{2}/', $value, $matches)) {
-					$valid = "invalid state";
-				}
-			}
+			// if ($key == "state") {
+				// if (!preg_match('/[a-zA-Z]{2}/', $value, $matches)) {
+					// $valid = "invalid state";
+				// }
+			// }
 
 			if ($key == "sex") {
 				if (!preg_match('/[A-Z]{1}/', $value, $matches)) {

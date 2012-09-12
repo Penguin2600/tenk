@@ -13,7 +13,22 @@
 			echo "</div>";
 		}
 	}
+	//Auto set our next bib
+		print_r($this -> postData);
+	if (($this -> postData)) {
+		$bibVal = ($this -> postData[0]['bibnumber'] + 1);
+	} else {
+		$bibVal = "";
+	}
 	?>
+
+	<!-- set value for our bib field -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('#bibnumber').val(<?=$bibVal?>
+		);
+		});
+	</script>
 
 	<form id="insertForm" action="/insert/post" method="post">
 		<h2>Main Entry Form</h2>

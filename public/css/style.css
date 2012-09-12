@@ -92,7 +92,7 @@ h3 {
 	margin: 10px 0 0 0;
 	font-size: 15px;
 	display: block;
-	width: 470px;
+	width: 660px;
 	background: #222;
 	float: right;
 }
@@ -103,8 +103,8 @@ h3 {
 .columnheader {
 	font-weight: bold;
 	display: inline-block;
-	width: 84px;
-	text-align: center;
+	width: 130px;
+	text-align: left;
 }
 
 .modifyheader {
@@ -124,15 +124,15 @@ h3 {
 
 .searchvalue {
 	display: inline-block;
-	width: 84px;
-	text-align: center;
+	width: 130px;
+	text-align: left;
 }
 
 .age {
-	width: 35px;
+	width: 40px;
 }
 .sex {
-	width: 35px;
+	width: 40px;
 }
 /*========== FORM STUFF ==========*/
 

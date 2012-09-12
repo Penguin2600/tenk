@@ -36,7 +36,7 @@ jQuery.validator.addMethod("bibnumber", function(value) {
 }, "Bib In Use");
 
 $(document).ready(function() {
-	
+
 	$("#bibnumber").focus();
 
 	$('#zipcode').live('blur', function() {
@@ -76,8 +76,8 @@ $(document).ready(function() {
 			form.submit();
 		}
 	});
-	
-		$("#editForm").validate({
+
+	$("#editForm").validate({
 		onkeyup : false,
 		onclick : false,
 		rules : {
@@ -109,8 +109,8 @@ $(document).ready(function() {
 			form.submit();
 		}
 	});
-	
-		$("#quickForm").validate({
+
+	$("#quickForm").validate({
 		onkeyup : false,
 		onclick : false,
 		rules : {
@@ -138,7 +138,6 @@ $(document).ready(function() {
 			form.submit();
 		}
 	});
-
 
 });
 

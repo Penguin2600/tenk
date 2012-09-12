@@ -21,9 +21,13 @@ class InsertController extends Zend_Controller_Action {
 		if (!Zend_Registry::get('session') -> postData) {
 			Zend_Registry::get('session') -> postData = array();
 		}
+		if (!Zend_Registry::get('session') -> nextBib) {
+			Zend_Registry::get('session') -> nextBib = array();
+		}
 
 		$this -> view -> postData = Zend_Registry::get('session') -> postData;
 		$this -> view -> notifications = Zend_Registry::get('session') -> messages;
+		$this -> view -> nextBib = Zend_Registry::get('session') -> nextBib;
 
 		Zend_Registry::get('session') -> clearMessages = true;
 
@@ -34,7 +38,6 @@ class InsertController extends Zend_Controller_Action {
 		// Connect to DB using creds stored in application.ini
 		$db = Zend_Db_Table_Abstract::getDefaultAdapter();
 		$postData = $this -> _request -> getParams();
-
 		//Build insert data the easy new way
 		$insertData = array();
 		foreach ($postData as $key => $value) {
@@ -42,6 +45,7 @@ class InsertController extends Zend_Controller_Action {
 				$insertData[$key] = $value;
 			}
 		}
+
 
 		//Build insert data the old way
 		//	$insertData = array(
@@ -66,22 +70,22 @@ class InsertController extends Zend_Controller_Action {
 
 		// Insert the data and
 		// Set the success/fail message $db -> insert('participant', $insertData)
-		$valid=$this -> validate($insertData);
-		
-		if ($this -> getRequest() -> getMethod() == 'POST' &&  $valid=="valid"){
+		$valid = $this -> validate($insertData);
+
+		if ($this -> getRequest() -> getMethod() == 'POST' && $valid == "valid") {
 			$db -> insert('participant', $insertData);
 			Zend_Registry::get('session') -> messages[] = array('type' => 'success', 'text' => 'Last Insert Was Successfull.');
 		} else {
-			Zend_Registry::get('session') -> messages[] = array('type' => 'error', 'text' => 'Last Insert Failed: '.$valid);
+			Zend_Registry::get('session') -> messages[] = array('type' => 'error', 'text' => 'Last Insert Failed: ' . $valid);
 		}
 
 		// Redirect back to page
 		$this -> _redirect('/insert');
 	}
 
-		public function validate($insertData) {
+	public function validate($insertData) {
 		$helpers = new TenK_Helpers;
-		$options = $helpers -> validate($insertData,1);
+		$options = $helpers -> validate($insertData, 1);
 		return $options;
 	}
 
