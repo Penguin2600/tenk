@@ -52,7 +52,7 @@ class CsvinterfaceController extends Zend_Controller_Action {
 			$fileName = $exportPath . $filePart;
 			$dlPath = "/exports/" . $filePart;
 
-			$sql = "(SELECT 'firstname','lastname','sex','age','bibnumber','event','team','division','city','state') UNION (SELECT firstname,lastname,sex,age,bibnumber,event.shortname,team, division.shortname, city, state INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, division, event WHERE participant.event=event.eid and participant.division=division.did and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . ") ORDER BY ABS(bibnumber) ASC;";
+			$sql = "(SELECT 'firstname','lastname','sex','age','bibnumber','event','team','division','city','state') UNION (SELECT firstname,lastname,sex,age,bibnumber,event.shortname,team, division.altname, city, state INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, division, event WHERE participant.event=event.eid and participant.division=division.did and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . ") ORDER BY ABS(bibnumber) ASC;";
 			$db -> query($sql);
 		}
 
@@ -61,7 +61,7 @@ class CsvinterfaceController extends Zend_Controller_Action {
 			$fileName = $exportPath . $filePart;
 			$dlPath = "/exports/" . $filePart;
 
-			$sql = "(SELECT 'activeid','bibnumber','lastname','firstname','address1','address2','city','state','zipcode','email','age','sex','size','event','division','team','registration','timestamp') UNION (SELECT activeid,bibnumber,lastname,firstname,address1,address2,city,state,zipcode,email,age,sex,size.shortname,event.shortname,division.shortname,team,registration.shortname,timestamp INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, size, event, division, registration WHERE participant.event=event.eid and participant.size=size.sid and participant.division=division.did and participant.registration=registration.rid and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . ") ORDER BY ABS(bibnumber) ASC;";
+			$sql = "(SELECT 'activeid','bibnumber','lastname','firstname','address1','address2','city','state','zipcode','email','age','sex','size','event','division','team','registration','timestamp') UNION (SELECT activeid,bibnumber,lastname,firstname,address1,address2,city,state,zipcode,email,age,sex,size.shortname,event.shortname,division.altname,team,registration.shortname,timestamp INTO OUTFILE '" . $fileName . "' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' FROM participant, size, event, division, registration WHERE participant.event=event.eid and participant.size=size.sid and participant.division=division.did and participant.registration=registration.rid and bibnumber >= " . $startBib . " and bibnumber <= " . $endBib . ") ORDER BY ABS(bibnumber) ASC;";
 			$db -> query($sql);
 		}
 		Zend_Registry::get('session') -> messages[] = array('type' => 'success', 'text' => 'CSV Export Ready: <a href="' . $dlPath . '">Click Here to Download</a>');
