@@ -22,9 +22,13 @@ class SearchController extends Zend_Controller_Action {
 			Zend_Registry::get('session') -> searchKeys = array();
 		}
 
+		if (!Zend_Registry::get('session') -> postData) {
+			Zend_Registry::get('session') -> postData = array();
+		}
+
+		$this -> view -> postData = Zend_Registry::get('session') -> postData;
 		$this -> view -> searchData = Zend_Registry::get('session') -> searchData;
 		$this -> view -> searchKeys = Zend_Registry::get('session') -> searchKeys;
-
 		$this -> view -> notifications = Zend_Registry::get('session') -> messages;
 
 		Zend_Registry::get('session') -> clearMessages = true;
@@ -54,11 +58,11 @@ class SearchController extends Zend_Controller_Action {
 	public function queryAction() {
 
 		$postData = $this -> _request -> getParams();
-
 		$queryData = array();
 		//we just want enough info here to pick a person out of a list, editing comes later.
-		$keys = array('pid', 'bibnumber', 'lastname', 'firstname', 'age','sex', 'timestamp');
+		$keys = array('pid', 'bibnumber', 'lastname', 'firstname', 'age', 'sex', 'timestamp');
 
+		$commaKeys="";
 		foreach ($keys as $key) {
 			$commaKeys = $commaKeys . $key . ",";
 
@@ -68,25 +72,40 @@ class SearchController extends Zend_Controller_Action {
 
 		$sql = "SELECT " . $commaKeys . " FROM `participant` WHERE ";
 		foreach ($postData as $key => $value) {
-			if ($key != 'controller' && $key != 'module' && $key != 'action' && $key != 'submit') {
+			if ($key != 'controller' && $key != 'module' && $key != 'action' && $key != 'submit' && $key != 'by') {
 				if ($value) {
 					$sql = $sql . $key . " like '%" . $value . "%' AND ";
-
 				}
 			}
 		}
 		//cap off the dangling AND
 		$sql = $sql . '1=1';
 
+		//Orderby if a header was clicked
+		if ($postData['by']) {
+			$sql = $sql . " ORDER BY " . $postData['by'];
+		}
+
+		//build query string
+		$queryString = "";
+		foreach ($postData as $key => $value) {
+			if ($key != 'controller' && $key != 'module' && $key != 'action' && $key != 'submit' && $key != 'by') {
+				if ($value) {
+					$queryString = $queryString . "&" . $key . "=" . $value;
+				}
+			}
+		}
+
 		// Connect to DB using creds stored in application.ini
 		$db = Zend_Db_Table_Abstract::getDefaultAdapter();
 		// Do our search
 		$result = $db -> fetchAll($sql, 2);
 
-		if ($this -> getRequest() -> getMethod() == 'POST' && $result) {
+		if ($result) {
 			$numRows = sizeof($result);
 			Zend_Registry::get('session') -> messages[] = array('type' => 'success', 'text' => 'Query returned ' . $numRows . ' results.');
 			Zend_Registry::get('session') -> searchData[] = $result;
+			Zend_Registry::get('session') -> postData[] = $queryString;
 			Zend_Registry::get('session') -> searchKeys[] = $keys;
 		} else {
 			Zend_Registry::get('session') -> messages[] = array('type' => 'error', 'text' => 'No Results Found.');

@@ -21,13 +21,9 @@ class InsertController extends Zend_Controller_Action {
 		if (!Zend_Registry::get('session') -> postData) {
 			Zend_Registry::get('session') -> postData = array();
 		}
-		if (!Zend_Registry::get('session') -> nextBib) {
-			Zend_Registry::get('session') -> nextBib = array();
-		}
 
 		$this -> view -> postData = Zend_Registry::get('session') -> postData;
 		$this -> view -> notifications = Zend_Registry::get('session') -> messages;
-		$this -> view -> nextBib = Zend_Registry::get('session') -> nextBib;
 
 		Zend_Registry::get('session') -> clearMessages = true;
 

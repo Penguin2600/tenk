@@ -61,8 +61,8 @@
 		echo '<div class="modifyheader"><img src="/images/remove.png"></div>';
 		foreach ($this -> searchKeys[0] as $header) {
 			if ($header != 'pid') {
-				echo '<div class="columnheader ' . $header.'">';
-				echo $header . " ";
+				echo '<div class="columnheader ' . $header . '">';
+				echo '<a href="/search/query?by=' . $header . $this -> postData[0]. '">' . $header . '</a> ';
 				echo '</div>';
 			}
 
