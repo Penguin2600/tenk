@@ -14,20 +14,26 @@
 		}
 	}
 	//Auto set our next bib
-	//print_r($this -> postData);
 	if (($this -> postData)) {
 		$bibVal = ($this -> postData[0]['bibnumber'] + 1);
 	} else {
 		$bibVal = "";
 	}
+
+	//Auto set our next registration type
+	if (($this -> postData)) {
+		$regVal = ($this -> postData[0]['registration']);
+	} else {
+		$regVal = 3;
+	}
 	?>
 
 	<!-- set value for our bib field -->
 	<script type="text/javascript">
-		$(document).ready(function() {
-		$('#bibnumber').val(<?=$bibVal?>
-		);
-		});
+$(document).ready(function() {
+$('#bibnumber').val(<?=$bibVal ?>);
+$('#registration').val(<?=$regVal ?>);
+});
 	</script>
 
 	<form id="insertForm" action="/insert/post" method="post">
