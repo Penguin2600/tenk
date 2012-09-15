@@ -83,7 +83,7 @@ class SearchController extends Zend_Controller_Action {
 
 		//Orderby if a header was clicked
 		if ($postData['by']) {
-			$sql = $sql . " ORDER BY " . $postData['by'];
+			$sql = $sql . " ORDER BY " . $postData['by'] . ", bibnumber";
 		}
 
 		//build query string

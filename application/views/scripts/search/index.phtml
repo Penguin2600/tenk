@@ -62,7 +62,7 @@
 		foreach ($this -> searchKeys[0] as $header) {
 			if ($header != 'pid') {
 				echo '<div class="columnheader ' . $header . '">';
-				echo '<a href="/search/query?by=' . $header . $this -> postData[0]. '">' . $header . '</a> ';
+				echo '<a href="/search/query?by=' . $header . $this -> postData[0] . '">' . $header . '</a> ';
 				echo '</div>';
 			}
 
@@ -80,9 +80,11 @@
 						//cut the timestamp down to just the date.
 						if ($key == 'timestamp') {
 							$value = explode(" ", $value);
+							$dateVal = explode("-", $value[0]);
+							$timeVal = explode(":", $value[1]);
 							echo '<div class="searchvalue">';
 
-							echo $value[0] . " ";
+							echo $dateVal[1] ."-". $dateVal[2] ." ". $timeVal[0] .":". $timeVal[1];
 							echo '</div>';
 						} else {
 							echo '<div class="searchvalue ' . $key . '">';

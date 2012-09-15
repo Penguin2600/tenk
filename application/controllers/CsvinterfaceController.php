@@ -74,6 +74,8 @@ class CsvinterfaceController extends Zend_Controller_Action {
 		$keyMap = array('activeid' => 0, 'lastname' => 1, 'firstname' => 2, 'address1' => 3, 'city' => 4, 'state' => 5, 'zipcode' => 6, 'email' => 7, 'age' => 8, 'sex' => 9, 'size' => 10, 'event' => 11, 'division' => 12, 'team' => 13, 'registration' => 14);
 		$db = Zend_Db_Table_Abstract::getDefaultAdapter();
 		$lineCount = 0;
+		$recordsInserted = 0;
+		$recordsRead = 0;
 		$bibNumber = $bibstart;
 
 		if (($handle = fopen($filePath, "r")) !== FALSE) {
@@ -139,15 +141,17 @@ class CsvinterfaceController extends Zend_Controller_Action {
 							$insertData[$key] = $data[$column];
 						}
 					}// do insert with verified free bib number and only if activeid is unique
+					$recordsRead++;
 					if ($this -> checkConflicts($bibNumber, $insertData['activeid'])) {
 						$insertData['bibnumber'] = $bibNumber;
 						$db -> insert('participant', $insertData);
+						$recordsInserted++;
 						$bibNumber++;
 					}
 				}
 			}
 			fclose($handle);
-			Zend_Registry::get('session') -> messages[] = array('type' => 'success', 'text' => 'CSV Import Complete');
+			Zend_Registry::get('session') -> messages[] = array('type' => 'success', 'text' => 'CSV Import Complete, Last Bib: ' . $bibNumber . " Read: " . $recordsRead . " Inserted: " . $recordsInserted);
 			$this -> _redirect('/csvinterface');
 
 		}

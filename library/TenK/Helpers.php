@@ -42,9 +42,9 @@ class TenK_Helpers {
 			}
 
 			// if ($key == "state") {
-				// if (!preg_match('/[a-zA-Z]{2}/', $value, $matches)) {
-					// $valid = "invalid state";
-				// }
+			// if (!preg_match('/[a-zA-Z]{2}/', $value, $matches)) {
+			// $valid = "invalid state";
+			// }
 			// }
 
 			if ($key == "sex") {
@@ -53,14 +53,18 @@ class TenK_Helpers {
 				}
 
 			}
-			if ($key == "zipcode") {
-				if (!is_numeric($value)) {
-					$valid = "zipcode not numeric";
-				}
 
-			}
+			// if ($key == "zipcode") {
+			// if (!is_numeric($value)) {
+			// $valid = "zipcode not numeric";
+			// }
+			// }
+
 			if ($key == "age") {
 				if (!is_numeric($value)) {
+					$valid = "age not numeric";
+				}
+				if ($value > 0 && $value < 100) {
 					$valid = "age not numeric";
 				}
 
