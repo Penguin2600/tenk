@@ -64,8 +64,11 @@ class TenK_Helpers {
 				if (!is_numeric($value)) {
 					$valid = "age not numeric";
 				}
-				if ($value > 0 && $value < 100) {
-					$valid = "age not numeric";
+				if ($value < 1) {
+					$valid = "age too low";
+				}
+				if ($value > 99) {
+					$valid = "age too high";
 				}
 
 			}
