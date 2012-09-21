@@ -75,7 +75,7 @@ class StatsController extends Zend_Controller_Action {
 		$result = $db -> fetchAll($sql);
 		$this -> view -> totalAge6 = $result[0]['COUNT(pid)'];
 
-		$sql = "Select COUNT(pid) from participant Where age > 60";
+		$sql = "Select COUNT(pid) from participant Where age >= 60 and age < 99";
 		$result = $db -> fetchAll($sql);
 		$this -> view -> totalAge7 = $result[0]['COUNT(pid)'];
 
