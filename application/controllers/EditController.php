@@ -65,10 +65,16 @@ class EditController extends Zend_Controller_Action {
 		// Update the data and
 		// Set the success/fail message
 
-		$valid = $this -> validate($insertData);
+		$valid = $this -> validate($insertData, 0);
 
 		if ($this -> getRequest() -> getMethod() == 'POST' && $valid == "valid") {
-			$result = $db -> update('participant', $insertData, "pid = '" . $pid . "'");
+			try {
+				$result = $db -> update('participant', $insertData, "pid = '" . $pid . "'");
+			} catch (Exception $e) {
+				Zend_Registry::get('session') -> messages[] = array('type' => 'error', 'text' => 'Update Failed: Bib Number In Use');
+				$this -> _redirect('/edit/pulledit?id=' . $pid);
+
+			}
 			Zend_Registry::get('session') -> messages[] = array('type' => 'success', 'text' => 'Update Was Successfull.');
 		} else {
 			Zend_Registry::get('session') -> messages[] = array('type' => 'error', 'text' => 'Update Failed: ' . $valid);
@@ -80,7 +86,7 @@ class EditController extends Zend_Controller_Action {
 
 	public function validate($insertData) {
 		$helpers = new TenK_Helpers;
-		$options = $helpers -> validate($insertData,0);
+		$options = $helpers -> validate($insertData, 0);
 		return $options;
 	}
 

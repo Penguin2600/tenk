@@ -66,7 +66,7 @@ class InsertController extends Zend_Controller_Action {
 
 		// Insert the data and
 		// Set the success/fail message $db -> insert('participant', $insertData)
-		$valid = $this -> validate($insertData);
+		$valid = $this -> validate($insertData, 1);
 
 		if ($this -> getRequest() -> getMethod() == 'POST' && $valid == "valid") {
 			$db -> insert('participant', $insertData);
