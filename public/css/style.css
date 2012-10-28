@@ -241,6 +241,11 @@ input[type="submit"]:hover {
 	border-color: #EEE;
 	color: #EEE;
 }
+input[type="submit"]:focus {
+	border: 2px solid;
+	border-color: #EEE;
+	color: #EEE;
+}
 
 #radiolist {
 	list-style: none;
@@ -308,6 +313,12 @@ label.error {
 }
 
 #navigation li a:hover {
+	border: 2px solid;
+	border-color: #DDD;
+	color: #DDD;
+}
+
+#navigation li a:focus {
 	border: 2px solid;
 	border-color: #DDD;
 	color: #DDD;

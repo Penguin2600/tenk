@@ -30,10 +30,11 @@
 
 	<!-- set value for our bib field -->
 	<script type="text/javascript">
-$(document).ready(function() {
+		$(document).ready(function() {
 $('#bibnumber').val(<?=$bibVal ?>);
-$('#registration').val(<?=$regVal ?>);
-});
+$('#registration').val(<?=$regVal ?>
+	);
+	});
 	</script>
 
 	<form id="insertForm" action="/insert/post" method="post">
@@ -165,20 +166,20 @@ $('#registration').val(<?=$regVal ?>);
 		</div>
 		<div class="formRow">
 			<div class="formcol1">
+				<h3>Team Name:</h3>
+			</div>
+			<div class="formcol2">
+				<input name="team" type="text" size="40">
+			</div>
+		</div>
+		<div class="formRow">
+			<div class="formcol1">
 				<h3>Division:</h3>
 			</div>
 			<div class="formcol2">
 				<?php
 				echo $this -> partial('partials/divisionRadios.phtml', array('result' => $this -> divisionOptions));
 				?>
-			</div>
-		</div>
-		<div class="formRow">
-			<div class="formcol1">
-				<h3>Team Name:</h3>
-			</div>
-			<div class="formcol2">
-				<input name="team" type="text" size="40">
 			</div>
 		</div>
 		<div class="formRow">
